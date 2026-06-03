@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon物販｜月30万円の完全ロードマップ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0a04; --brown:#1e1008; --gold:#b8860b; --gold2:#d4a017; --gold3:#f0c040;
+  --cream:#faf6ec; --cream2:#f5efe0; --warm:#ede4cf; --muted:#7a6a52;
+  --red:#8b1a1a; --green:#1a5c4a; --border:rgba(184,134,11,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-size:15px;line-height:1.85;overflow-x:hidden;}
+
+/* grain */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9998;opacity:.45;}
+
+/* ── GOLD BAND ── */
+.gold-band{
+  background:linear-gradient(135deg,#5c3d00 0%,#b8860b 28%,#e8c060 52%,#b8860b 74%,#5c3d00 100%);
+  color:#fff;text-align:center;padding:22px 24px;
+  font-family:'Noto Serif JP',serif;font-size:17px;font-weight:900;
+  line-height:1.65;letter-spacing:.06em;text-shadow:0 1px 6px rgba(0,0,0,.4);
+  position:relative;overflow:hidden;
+}
+.gold-band::before,.gold-band::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);}
+.gold-band::before{top:5px;} .gold-band::after{bottom:5px;}
+
+/* ── HERO ── */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,rgba(14,10,4,.15) 0%,rgba(14,10,4,.6) 55%,rgba(14,10,4,.93) 100%),
+    url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80&auto=format&fit=crop') center/cover no-repeat;
+}
+/* fallback when photo blocked */
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#0e0a04 0%,#2a1400 50%,#1a0c00 100%);
+  z-index:-1;
+}
+.hero-content{position:relative;padding:0 24px 56px;text-align:center;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(184,134,11,.18);border:1px solid rgba(184,134,11,.5);
+  color:var(--gold3);font-size:11px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:5px 18px;border-radius:100px;margin-bottom:20px;
+}
+.hero-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(26px,7vw,44px);font-weight:900;color:#fff;
+  line-height:1.3;margin-bottom:14px;text-shadow:0 3px 20px rgba(0,0,0,.55);letter-spacing:.02em;
+}
+.hero-title em{font-style:normal;color:var(--gold3);display:block;font-size:1.18em;}
+.hero-sub{color:rgba(255,255,255,.72);font-size:13px;line-height:1.85;max-width:340px;margin:0 auto 32px;}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.38);font-size:10px;letter-spacing:.18em;animation:breathe 2.8s ease infinite;}
+.scroll-hint::after{content:'';width:1px;height:38px;background:linear-gradient(to bottom,var(--gold2),transparent);}
+@keyframes breathe{0%,100%{opacity:.35;}50%{opacity:.85;}}
+
+/* ── SECTIONS ── */
+.sec{padding:64px 24px;max-width:480px;margin:0 auto;}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--gold2);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-label::before{content:'';flex:1;max-width:28px;height:1px;background:var(--gold2);opacity:.5;}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:clamp(22px,5.5vw,28px);font-weight:900;color:var(--brown);line-height:1.4;margin-bottom:22px;letter-spacing:.02em;}
+.sec-title .g{color:var(--gold);} .sec-title .r{color:var(--red);} .sec-title .gr{color:var(--green);}
+.sec-body{font-size:14px;color:var(--muted);line-height:2;}
+.sec-body strong{color:var(--brown);font-weight:700;}
+
+/* ── PHOTO CARD ── */
+.photo-card{border-radius:14px;overflow:hidden;box-shadow:0 14px 50px rgba(14,10,4,.16);margin:28px 0;position:relative;background:var(--warm);}
+.photo-card img{width:100%;height:230px;object-fit:cover;display:block;transition:transform .7s ease;}
+.photo-card:hover img{transform:scale(1.04);}
+.photo-card-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(14,10,4,.88),transparent);padding:32px 18px 16px;color:#fff;font-size:12px;font-weight:500;letter-spacing:.04em;}
+/* fallback bg for photo card when img not loaded */
+.photo-card figure{position:relative;}
+
+/* ── PROBLEM/OK CARDS ── */
+.card-stack{display:flex;flex-direction:column;gap:10px;margin:24px 0;}
+.ng-card{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid rgba(139,26,26,.14);border-left:3px solid var(--red);border-radius:8px;padding:14px 16px;font-size:14px;font-weight:500;color:#6b1414;box-shadow:0 2px 12px rgba(139,26,26,.06);}
+.ng-card .ic{font-size:15px;flex-shrink:0;margin-top:2px;}
+.ok-card{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid rgba(26,92,74,.14);border-left:3px solid var(--green);border-radius:8px;padding:14px 16px;font-size:14px;font-weight:500;color:var(--green);box-shadow:0 2px 12px rgba(26,92,74,.06);}
+.ok-card .ic{font-size:15px;flex-shrink:0;margin-top:2px;}
+.arrow-down{text-align:center;font-size:28px;color:var(--gold2);margin:20px 0;line-height:1;}
+
+/* ── QUOTE ── */
+.quote{background:#fff;border-radius:12px;padding:26px 22px;margin:24px 0;font-size:14px;color:var(--brown);line-height:2.05;box-shadow:0 4px 24px rgba(14,10,4,.08);border-top:2px solid var(--gold2);position:relative;}
+.quote::before{content:'"';position:absolute;top:0;left:16px;font-family:'Cormorant Garamond',serif;font-size:80px;color:var(--gold2);opacity:.12;line-height:1;}
+.quote strong{color:var(--gold);font-weight:700;}
+
+/* ── ROADMAP ── */
+.rm-step{display:grid;grid-template-columns:50px 1fr;gap:0 16px;}
+.rm-left{display:flex;flex-direction:column;align-items:center;}
+.rm-dot{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;box-shadow:0 4px 18px rgba(184,134,11,.38);flex-shrink:0;z-index:2;border:2px solid rgba(255,255,255,.3);}
+.rm-line{flex:1;width:1px;background:linear-gradient(to bottom,var(--gold2),rgba(184,134,11,.08));margin:6px 0;}
+.rm-body{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 20px 24px;margin-bottom:20px;box-shadow:0 4px 20px rgba(14,10,4,.07);position:relative;overflow:hidden;}
+.rm-body::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold2),transparent);}
+.rm-month{font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--gold2);text-transform:uppercase;margin-bottom:8px;}
+.rm-body h3{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:900;color:var(--brown);margin-bottom:8px;line-height:1.4;}
+.rm-body p{font-size:13px;color:var(--muted);line-height:1.85;}
+.rm-goal{display:inline-block;margin-top:12px;background:linear-gradient(135deg,rgba(184,134,11,.09),rgba(212,160,23,.11));border:1px solid rgba(184,134,11,.3);color:var(--gold);font-size:11px;font-weight:700;padding:4px 14px;border-radius:100px;letter-spacing:.04em;}
+
+/* ── CONTENT ITEMS ── */
+.content-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;box-shadow:0 3px 16px rgba(14,10,4,.06);transition:transform .25s,box-shadow .25s;}
+.content-item:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(14,10,4,.1);}
+.ci-num{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(184,134,11,.3);}
+.content-item h3{font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--brown);margin-bottom:4px;line-height:1.45;}
+.content-item p{font-size:12px;color:var(--muted);line-height:1.75;}
+.bonus-item{background:linear-gradient(135deg,#fdf8ea,#f8f0d8);border:1.5px solid var(--gold2);border-radius:12px;padding:20px 18px;margin-bottom:12px;box-shadow:0 4px 20px rgba(184,134,11,.12);}
+.bonus-item h3{font-family:'Noto Serif JP',serif;font-size:14px;font-weight:900;color:var(--gold);margin-bottom:8px;}
+.bonus-item p{font-size:13px;color:var(--muted);line-height:1.8;}
+
+/* ── VOICE ── */
+.voice-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 20px;margin-bottom:20px;box-shadow:0 6px 28px rgba(14,10,4,.08);position:relative;overflow:hidden;}
+.voice-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold2),var(--gold3),var(--gold2));}
+.voice-head{display:flex;align-items:center;gap:14px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--warm);}
+.v-avatar{width:50px;height:50px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--border);box-shadow:0 2px 10px rgba(14,10,4,.12);}
+.v-avatar img{width:100%;height:100%;object-fit:cover;}
+/* Fallback avatar (CSS circle with initial) */
+.v-avatar-fallback{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;border:2px solid var(--border);}
+.v-meta .age{font-size:11px;color:var(--muted);}
+.v-meta .name{font-size:14px;font-weight:700;color:var(--brown);line-height:1.35;}
+.voice-body{font-size:13px;color:#555;line-height:1.95;}
+.voice-tag{display:inline-block;margin-top:12px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(184,134,11,.3);}
+
+/* ── PHOTO COLLAGE ── */
+.photo-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0;}
+.photo-row .pr-cell{border-radius:10px;overflow:hidden;height:150px;box-shadow:0 6px 20px rgba(14,10,4,.12);}
+.photo-row .pr-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.photo-row .pr-cell:hover img{transform:scale(1.04);}
+
+/* ── STATS ── */
+.stats-section{background:linear-gradient(135deg,#0e0a04 0%,#1e1008 40%,#2a1800 100%);padding:56px 24px;text-align:center;position:relative;overflow:hidden;}
+.stats-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(184,134,11,.14) 0%,transparent 70%);}
+.stats-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--gold2);text-transform:uppercase;margin-bottom:18px;opacity:.75;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:380px;margin:0 auto 14px;}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,7vw,40px);font-weight:600;color:var(--gold3);line-height:1;margin-bottom:6px;letter-spacing:.02em;}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,.48);letter-spacing:.06em;}
+.stats-note{font-size:10px;color:rgba(255,255,255,.22);margin-top:8px;}
+
+/* ── FAQ ── */
+.faq-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(14,10,4,.05);transition:box-shadow .2s;}
+.faq-item:hover{box-shadow:0 4px 18px rgba(14,10,4,.09);}
+.faq-q{display:flex;align-items:flex-start;gap:10px;padding:16px 18px;cursor:pointer;background:#fff;transition:background .2s;}
+.faq-q:hover{background:var(--cream);}
+.fq-mark{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.fq-text{font-size:13px;font-weight:700;color:var(--brown);flex:1;line-height:1.5;}
+.fq-chev{color:var(--gold2);font-size:14px;transition:transform .3s;flex-shrink:0;margin-top:2px;}
+.faq-item.open .fq-chev{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-a-inner{padding:0 18px 18px 52px;font-size:13px;color:var(--muted);line-height:1.9;}
+.faq-item.open .faq-a{max-height:300px;}
+
+/* ── FLOW ── */
+.flow-step{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;}
+.fl-num{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gold2);background:var(--cream);color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.flow-step:last-child .fl-num{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(184,134,11,.35);}
+.fl-body h3{font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--brown);margin-bottom:4px;padding-top:6px;}
+.fl-body p{font-size:12px;color:var(--muted);line-height:1.75;}
+
+/* ── CLOSING ── */
+.closing{position:relative;overflow:hidden;min-height:540px;display:flex;flex-direction:column;justify-content:flex-end;}
+.closing-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,rgba(14,10,4,.25) 0%,rgba(14,10,4,.75) 55%,rgba(14,10,4,.96) 100%),
+    url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&q=80&auto=format&fit=crop') center/cover no-repeat;
+}
+.closing-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#0e0a04,#2a1200);z-index:-1;}
+.closing-content{position:relative;padding:0 24px 60px;text-align:center;}
+.closing-title{font-family:'Noto Serif JP',serif;font-size:clamp(21px,5.5vw,28px);font-weight:900;color:#fff;line-height:1.45;margin-bottom:16px;text-shadow:0 2px 16px rgba(0,0,0,.5);}
+.closing-title .g{color:var(--gold3);}
+.closing-body{font-size:13px;color:rgba(255,255,255,.68);line-height:1.95;margin-bottom:32px;}
+.zoom-card{background:rgba(255,255,255,.07);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(184,134,11,.42);border-radius:14px;padding:26px 24px;max-width:340px;margin:0 auto;}
+.zoom-card .zc-icon{font-size:34px;margin-bottom:10px;}
+.zoom-card .zc-label{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase;margin-bottom:8px;}
+.zoom-card .zc-text{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:900;color:#fff;line-height:1.5;margin-bottom:8px;}
+.zoom-card .zc-sub{font-size:11px;color:rgba(255,255,255,.4);}
+
+footer{background:var(--ink);padding:24px;text-align:center;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.08em;}
+
+/* ── BG ALT ── */
+.bg-cream2{background:var(--cream2);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="reveal">
+      <div class="hero-eyebrow">🔥 Zoom面談前に必ずお読みください</div>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <h1 class="hero-title">
+        未経験から<br>
+        <em>月30万円</em>を稼ぐ<br>物販の完全ロードマップ
+      </h1>
+    </div>
+    <div class="reveal" style="transition-delay:.2s">
+      <p class="hero-sub">
+        Amazonリサーチツール ＋ 24本講座動画 ＋<br>
+        LINE個別サポートで、再現性高く収益を作る仕組み
+      </p>
+    </div>
+    <div class="scroll-hint reveal" style="transition-delay:.35s">SCROLL</div>
+  </div>
+</div>
+
+<!-- ════════ INTRO ════════ -->
+<div class="sec reveal">
+  <p class="sec-label">BEFORE THE ZOOM</p>
+  <h2 class="sec-title">面談の前に<br>これだけ知っておいてください</h2>
+  <p class="sec-body">
+    このページは、すでに<strong>日程を調整していただいた方への事前資料</strong>です。<br><br>
+    Zoomでは30〜40分でプログラムの詳細をお伝えしますが、その前にこの内容を読んでおくことで「なぜ物販なのか」「何が提供されるのか」がより明確になります。<br><br>
+    難しい話は一切ありません。ゆっくり読み進めてください。
+  </p>
+</div>
+
+<!-- ════════ PROBLEM ════════ -->
+<div class="gold-band reveal">稼げない人の99%は<br>同じミスをしています</div>
+
+<div style="background:var(--cream2);">
+<div class="sec reveal">
+  <p class="sec-label">THE PROBLEM</p>
+  <h2 class="sec-title">副業で<span class="r">止まる</span>のは<br>いつもこの3つ</h2>
+
+  <div class="photo-card reveal">
+    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80&auto=format&fit=crop&crop=center" alt="悩む人" loading="lazy" onerror="this.closest('.photo-card').style.background='linear-gradient(135deg,#1e1008,#3d2010)';this.remove()">
+    <div class="photo-card-caption">副業を始めようとして、途中で止まってしまう…</div>
+  </div>
+
+  <div class="card-stack">
+    <div class="ng-card"><span class="ic">✖</span>何を仕入れればいいかわからない →後回し</div>
+    <div class="ng-card"><span class="ic">✖</span>利益計算の方法がわからない →諦める</div>
+    <div class="ng-card"><span class="ic">✖</span>売れる商品が見つからない →やめてしまう</div>
+  </div>
+
+  <div class="quote reveal">
+    人は、「できないから」やらないのではなく、<br>
+    <strong>「面倒くさくなる」からやらなくなる。</strong><br><br>
+    だから、<strong style="color:var(--brown);">「考える工程をゼロにする」</strong>仕組みが必要です。
+  </div>
+
+  <div class="arrow-down">⬇</div>
+
+  <div class="card-stack">
+    <div class="ok-card"><span class="ic">✅</span>Amazonリサーチツールで売れ筋を自動特定</div>
+    <div class="ok-card"><span class="ic">✅</span>動画24本で利益計算まで完全マスター</div>
+    <div class="ok-card"><span class="ic">✅</span>LINEサポートで疑問をすぐ解消</div>
+  </div>
+</div>
+</div>
+
+<!-- ════════ ROADMAP ════════ -->
+<div class="gold-band reveal">月30万円までの<br>完全ロードマップ</div>
+
+<div class="sec reveal">
+  <p class="sec-label">ROADMAP</p>
+  <h2 class="sec-title">3ステップで<br><span class="g">月30万円</span>を達成する</h2>
+
+  <div class="photo-card reveal">
+    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format&fit=crop" alt="戦略" loading="lazy" onerror="this.closest('.photo-card').style.background='linear-gradient(135deg,#1e1008,#3d2010)';this.remove()">
+    <div class="photo-card-caption">正しいロードマップがあれば、迷わず進める</div>
+  </div>
+
+  <div style="margin-top:32px;">
+    <div class="rm-step reveal">
+      <div class="rm-left"><div class="rm-dot">1</div><div class="rm-line"></div></div>
+      <div class="rm-body">
+        <p class="rm-month">MONTH 1 — 基礎習得フェーズ</p>
+        <h3>物販の仕組みを完全に理解する</h3>
+        <p>動画24本で物販の仕組み・Amazon出品方法・利益計算・売上管理まですべて習得。1コマ3〜5分なのでスキマ時間に見るだけで、1ヶ月後には全体像がつかめます。</p>
+        <span class="rm-goal">🎯 ゴール：仕入れ〜販売の流れを完全理解</span>
+      </div>
+    </div>
+    <div class="rm-step reveal">
+      <div class="rm-left"><div class="rm-dot">2</div><div class="rm-line"></div></div>
+      <div class="rm-body">
+        <p class="rm-month">MONTH 2〜3 — リサーチ＆仕入れフェーズ</p>
+        <h3>ツールで売れ筋を見つけ初仕入れへ</h3>
+        <p>Amazonリサーチツールを使って売れ筋商品を特定。初めての仕入れ・初めての売上を達成します。LINEサポートで不安な点はいつでも相談できます。</p>
+        <span class="rm-goal">🎯 ゴール：初月利益10万円</span>
+      </div>
+    </div>
+    <div class="rm-step reveal">
+      <div class="rm-left"><div class="rm-dot">3</div></div>
+      <div class="rm-body">
+        <p class="rm-month">MONTH 3〜6 — スケールアップフェーズ</p>
+        <h3>仕入れを拡大し月30万円超えを達成</h3>
+        <p>実績のある商品の仕入れ量を増やし月30万円超えを達成。無料案件会員権を活用することで収益をさらに最大化できます。</p>
+        <span class="rm-goal">🎯 ゴール：月30万円 ＋ 特典で+30万円</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ CONTENTS ════════ -->
+<div class="gold-band reveal">提供する5つの価値</div>
+
+<div style="background:var(--cream2);">
+<div class="sec reveal">
+  <p class="sec-label">WHAT YOU GET</p>
+  <h2 class="sec-title">必要なものが<br>すべて揃っています</h2>
+
+  <div class="photo-card reveal">
+    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop" alt="ビジネスツール" loading="lazy" onerror="this.closest('.photo-card').style.background='linear-gradient(135deg,#071a14,#0f2d20)';this.remove()">
+    <div class="photo-card-caption">あとは行動するだけ。すべて揃っています。</div>
+  </div>
+
+  <div class="content-item reveal">
+    <div class="ci-num">1</div>
+    <div><h3>🗺️ 月30万円ロードマップ完全公開</h3><p>実際に利益を出してきたノウハウをすべて提供。何をいつどうすべきかが明確になります。</p></div>
+  </div>
+  <div class="content-item reveal">
+    <div class="ci-num">2</div>
+    <div><h3>💬 サポートLINE 個別対応（無制限）</h3><p>疑問・不安はいつでもLINEで相談可能。一人で悩まずプロのサポートを受けながら進められます。</p></div>
+  </div>
+  <div class="content-item reveal">
+    <div class="ci-num">3</div>
+    <div><h3>🎬 物販講座動画 全24コマ</h3><p>1コマ3〜5分。毎日1コマで1ヶ月後には物販の仕組みから売上管理まで完全理解できます。</p></div>
+  </div>
+  <div class="content-item reveal">
+    <div class="ci-num">4</div>
+    <div><h3>🔧 Amazonリサーチツール（自動化）</h3><p>売れ筋・平均価格などのリサーチを自動で行います。データで判断できるので迷いがゼロになります。</p></div>
+  </div>
+  <div class="bonus-item reveal">
+    <h3>🎁 特典：無料案件の会員権付与</h3>
+    <p>3〜6ヶ月で総額約30万円前後の報酬獲得が可能。物販収益とあわせて収入を最大化できます。</p>
+    <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+      <div class="ok-card" style="margin:0;"><span class="ic">✅</span>初期費用ゼロ</div>
+      <div class="ok-card" style="margin:0;"><span class="ic">✅</span>リスク最小</div>
+      <div class="ok-card" style="margin:0;"><span class="ic">✅</span>再現性重視</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════ VOICES ════════ -->
+<div class="gold-band reveal">利用者の声</div>
+
+
+
+<div class="sec reveal">
+
+
+  <div class="voice-card reveal">
+    <div class="voice-head">
+      <div class="v-avatar">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&auto=format&fit=crop&crop=face" alt="" loading="lazy" onerror="this.parentNode.innerHTML='👩'">
+      </div>
+      <div class="v-meta"><p class="age">20代　女性</p><p class="name">副業は難しいと思ってた私が、<br>2ヶ月で"放置収入"を実感！</p></div>
+    </div>
+    <p class="voice-body">最初は半信半疑でしたが、設定してしまえば本当にやることが少なくて、毎日スマホを開くのは10分くらい。それなのに、始めて2ヶ月でサイド収入が月20万円ベースに。「私、何か特別なことしたっけ？」と思うくらいです。</p>
+    <span class="voice-tag">🎉 2ヶ月で月20万円達成</span>
+  </div>
+
+  <div class="voice-card reveal">
+    <div class="voice-head">
+      <div class="v-avatar">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&auto=format&fit=crop&crop=face" alt="" loading="lazy" onerror="this.parentNode.innerHTML='👨‍💼'">
+      </div>
+      <div class="v-meta"><p class="age">20代　男性</p><p class="name">仕事に縛られない収入源が、<br>こんなに簡単にできるとは…</p></div>
+    </div>
+    <p class="voice-body">「月1万円くらい稼げれば十分」と思っていましたが、まさかの1ヶ月で45万円。作業時間は本当に少なくて、空き時間にスマホを確認する程度。「時間＝お金」じゃない稼ぎ方を初めて実感できました。</p>
+    <span class="voice-tag">🎉 1ヶ月で45万円達成</span>
+  </div>
+
+  <div class="voice-card reveal">
+    <div class="voice-head">
+      <div class="v-avatar">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80&auto=format&fit=crop&crop=face" alt="" loading="lazy" onerror="this.parentNode.innerHTML='👩‍👧'">
+      </div>
+      <div class="v-meta"><p class="age">30代　女性</p><p class="name">家事・育児の合間でも、<br>収入が増えるって本当でした！</p></div>
+    </div>
+    <p class="voice-body">初月は8万円と控えめでしたが、やることはほぼ同じなのに3ヶ月目には月収30万円を突破。特別なスキルも不要で、「ツールが勝手に動いてくれている」という感覚が一番近いです。</p>
+    <span class="voice-tag">🎉 3ヶ月で月30万円突破</span>
+  </div>
+
+  <div class="voice-card reveal">
+    <div class="voice-head">
+      <div class="v-avatar">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop&crop=face" alt="" loading="lazy" onerror="this.parentNode.innerHTML='👨'">
+      </div>
+      <div class="v-meta"><p class="age">30代　男性</p><p class="name">副業のはずが、気づいたら<br>"収入の柱"になっていました！</p></div>
+    </div>
+    <p class="voice-body">本業が営業職で副業に割ける時間はほとんどなかったのですが、1ヶ月目で副収入18万円。そのまま継続し、半年後には安定して月50万円以上に。将来の不安がかなり減りました。</p>
+    <span class="voice-tag">🎉 半年で月50万円達成</span>
+  </div>
+</div>
+
+<!-- ════════ FAQ ════════ -->
+<div class="gold-band reveal">よくある質問</div>
+
+<div style="background:var(--cream2);">
+<div class="sec reveal">
+  <div class="faq-item">
+    <div class="faq-q"><div class="fq-mark">Q</div><p class="fq-text">未経験でも本当に始められますか？</p><span class="fq-chev">▾</span></div>
+    <div class="faq-a"><div class="faq-a-inner">はい。むしろ未経験の方向けです。動画24本で基礎から学べ、LINEサポートで不明点はすぐ解消できます。特別なスキルや資格は一切不要です。</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><div class="fq-mark">Q</div><p class="fq-text">どのくらいの作業時間が必要ですか？</p><span class="fq-chev">▾</span></div>
+    <div class="faq-a"><div class="faq-a-inner">最初は1日1〜2時間から始められます。動画は1コマ3〜5分なのでスキマ時間でOKです。慣れてくると効率が上がり、さらに短い時間で運営できます。</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><div class="fq-mark">Q</div><p class="fq-text">リサーチツールは難しくないですか？</p><span class="fq-chev">▾</span></div>
+    <div class="faq-a"><div class="faq-a-inner">直感的に使えるよう設計されています。売れ筋・平均価格が自動で表示されるので、ITが苦手な方でも安心です。使い方もLINEでサポートします。</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><div class="fq-mark">Q</div><p class="fq-text">無料案件の会員権とは何ですか？</p><span class="fq-chev">▾</span></div>
+    <div class="faq-a"><div class="faq-a-inner">物販とは別に、紹介や案件受注などで収益を得られる仕組みの会員権です。3〜6ヶ月で総額約30万円前後の報酬獲得が可能です。詳細はZoomにてご説明します。</div></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><div class="fq-mark">Q</div><p class="fq-text">サポートはいつまで受けられますか？</p><span class="fq-chev">▾</span></div>
+    <div class="faq-a"><div class="faq-a-inner">プログラム期間中はLINEで無制限にご質問・ご相談いただけます。一人で悩まず、詰まったときはいつでも気軽に相談してください。</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════ FLOW ════════ -->
+<div class="gold-band reveal">Zoomまでの流れ</div>
+
+<div class="sec reveal">
+  <p class="sec-label">NEXT STEPS</p>
+  <h2 class="sec-title">日程調整から<br><span class="gr">スタートまで</span></h2>
+  <div class="flow-step"><div class="fl-num">1</div><div class="fl-body"><h3>✅ このページを読む（今ここ）</h3><p>Zoom面談の前に内容を把握しておくことで、当日の理解が深まります。</p></div></div>
+  <div class="flow-step"><div class="fl-num">2</div><div class="fl-body"><h3>💬 LINEで日程調整済み</h3><p>すでに日程を調整していただきありがとうございます。</p></div></div>
+  <div class="flow-step"><div class="fl-num">3</div><div class="fl-body"><h3>🎥 Zoomで詳細説明（30〜40分）</h3><p>プログラムの詳細・ご質問にすべてお答えします。無理な勧誘は一切ありません。</p></div></div>
+  <div class="flow-step"><div class="fl-num">4</div><div class="fl-body"><h3>🚀 スタート！</h3><p>ツール・動画・サポートが揃った環境ですぐに開始できます。</p></div></div>
+</div>
+
+<!-- ════════ CLOSING ════════ -->
+<div class="closing">
+  <div class="closing-bg"></div>
+  <div class="closing-content reveal">
+    <h2 class="closing-title"><span class="g">「考えなくていい仕組み」</span>を<br>先に持った人が静かに積み続ける</h2>
+    <p class="closing-body">副業は、頭がいい人や行動力がある人だけが稼ぐ世界ではありません。<br>正しいロードマップとツールさえあれば、<br>誰でも再現性高く月30万円を目指せます。<br><br>Zoomでお待ちしています。</p>
+    <div class="zoom-card">
+      <div class="zc-icon">🎥</div>
+      <p class="zc-label">YOUR ZOOM DATE</p>
+      <p class="zc-text">ご予約の日時に<br>Zoomにてお待ちしております</p>
+      <p class="zc-sub">※ URLはLINEにてお送りします</p>
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 物販サポートプログラム. All rights reserved.</footer>
+
+<script>
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*55);io.unobserve(e.target);}});
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item'),open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
